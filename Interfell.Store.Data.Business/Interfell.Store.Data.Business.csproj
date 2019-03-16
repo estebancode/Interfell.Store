@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Interfell.Store.Data.Business</RootNamespace>
     <AssemblyName>Interfell.Store.Data.Business</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Business.Result.Base, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Business.Result.Base.1.0.0\lib\netstandard2.0\Business.Result.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,11 +45,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseBusiness.cs" />
+    <Compile Include="Implementation\ArticleBusiness.cs" />
+    <Compile Include="Implementation\StoreBusiness.cs" />
+    <Compile Include="Interfaces\IArticleBusiness.cs" />
+    <Compile Include="Interfaces\IStoreBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Implementation\" />
-    <Folder Include="Interfaces\" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interfell.Store.Data.Model\Interfell.Store.Data.Model.csproj">
+      <Project>{2a5602f4-76d6-4315-93ff-e2810f07e406}</Project>
+      <Name>Interfell.Store.Data.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfell.Store.Module.Commons\Interfell.Store.Module.Commons.csproj">
+      <Project>{226e4c1e-7025-4201-b269-3aa7f7708d3c}</Project>
+      <Name>Interfell.Store.Module.Commons</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
