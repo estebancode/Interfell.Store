@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigureAutomapper.cs" />
     <Compile Include="EfBase.cs" />
     <Compile Include="IBaseModel.cs" />
     <Compile Include="Implementation\ArticleModel.cs" />

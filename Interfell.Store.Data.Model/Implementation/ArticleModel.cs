@@ -3,10 +3,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Interfell.Store.Data.Entities.Entity;
 using Interfell.Store.Data.Model.Interfaces;
 using Interfell.Store.Module.Commons.DTO;
 
@@ -16,9 +20,12 @@ namespace Interfell.Store.Data.Model.Implementation
 {
     public class ArticleModel : EfBase, IArticleModel
     {
-        public Task<ArticleDTO> CreateAsync(ArticleDTO entity)
+        public async Task<ArticleDTO> CreateAsync(ArticleDTO entity)
         {
-            throw new NotImplementedException();
+            var entitie = Mapper.Map<ArticleDTO, Articles>(entity);
+            _context.Articles.Add(entitie);
+            await _context.SaveChangesAsync();
+            return Mapper.Map<Articles, ArticleDTO>(entitie);
         }
 
         public Task<bool> Delete(int id)
@@ -26,29 +33,51 @@ namespace Interfell.Store.Data.Model.Implementation
             throw new NotImplementedException();
         }
 
-        public Task<bool> EditAsync(ArticleDTO entity)
+        public async Task<bool> EditAsync(ArticleDTO entity)
         {
-            throw new NotImplementedException();
+            var entitie = new Articles()
+            {
+                IdArticle = entity.IdArticle,
+            };
+
+            _context.Articles.Attach(entitie);
+
+            //Ese necesario asignar los valores despues de "atachar" la entidad
+            entitie.Name = entity.Name;
+            entitie.Description = entity.Description;
+            entitie.Price = entity.Price;
+            entitie.TotalInShelf = entity.TotalInShelf;
+            entitie.TotalInVault = entity.TotalInVault;
+
+            _context.Configuration.ValidateOnSaveEnabled = false;
+            await _context.SaveChangesAsync();
+            return true;
         }
 
-        public Task<List<ArticleDTO>> GetAll(int quantity = 0)
+        public async Task<List<ArticleDTO>> GetAll(int quantity = 0)
         {
-            throw new NotImplementedException();
+            if (quantity == 0)
+                return await _context.Articles.ProjectTo<ArticleDTO>().ToListAsync();
+            else
+            {
+                return await _context.Articles.Take(quantity).ProjectTo<ArticleDTO>().ToListAsync();
+            }
         }
 
-        public Task<List<ArticleDTO>> GetAllBy(Expression<Func<ArticleDTO, bool>> condition)
+        public async Task<List<ArticleDTO>> GetAllBy(Expression<Func<ArticleDTO, bool>> condition)
         {
-            throw new NotImplementedException();
+            return await _context.Articles.ProjectTo<ArticleDTO>().Where(condition).ToListAsync();
         }
 
-        public Task<ArticleDTO> GetBy(Expression<Func<ArticleDTO, bool>> condition)
+        public async Task<ArticleDTO> GetBy(Expression<Func<ArticleDTO, bool>> condition)
         {
-            throw new NotImplementedException();
+            return await _context.Articles.ProjectTo<ArticleDTO>().FirstOrDefaultAsync(condition);
         }
 
-        public Task<ArticleDTO> GetById(int id)
+        public async Task<ArticleDTO> GetById(int id)
         {
-            throw new NotImplementedException();
+            var entity = await _context.Articles.FindAsync(id);
+            return Mapper.Map<Articles, ArticleDTO>(entity);
         }
     }
 }

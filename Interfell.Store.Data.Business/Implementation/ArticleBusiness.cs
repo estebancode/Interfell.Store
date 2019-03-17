@@ -53,29 +53,69 @@ namespace Interfell.Store.Data.Business.Implementation
             throw new NotImplementedException();
         }
 
-        public Task<BusinessResult<bool>> EditAsync(ArticleDTO entity)
+        public async Task<BusinessResult<bool>> EditAsync(ArticleDTO entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var resultOperation = await _iarticleModel.EditAsync(entity);
+                return BusinessResult<bool>.Success(true, General.OperationSucsess);
+            }
+            catch (Exception ex)
+            {
+                return BusinessResult<bool>.Issue(false, General.OperationIssue, ex);
+            }
         }
 
-        public Task<BusinessResult<List<ArticleDTO>>> GetAll(int quantity = 0)
+        public async Task<BusinessResult<List<ArticleDTO>>> GetAll(int quantity = 0)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _iarticleModel.GetAll(quantity);
+                return BusinessResult<List<ArticleDTO>>.Success(result, General.OperationSucsess);
+            }
+            catch (Exception ex)
+            {
+                return BusinessResult<List<ArticleDTO>>.Issue(null, General.OperationIssue, ex);
+            }
         }
 
-        public Task<BusinessResult<List<ArticleDTO>>> GetAllBy(Expression<Func<ArticleDTO, bool>> condition)
+        public async Task<BusinessResult<List<ArticleDTO>>> GetAllBy(Expression<Func<ArticleDTO, bool>> condition)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _iarticleModel.GetAllBy(condition);
+                return BusinessResult<List<ArticleDTO>>.Success(result, General.OperationSucsess);
+            }
+            catch (Exception ex)
+            {
+                return BusinessResult<List<ArticleDTO>>.Issue(null, General.OperationIssue, ex);
+            }
         }
 
-        public Task<BusinessResult<ArticleDTO>> GetBy(Expression<Func<ArticleDTO, bool>> condition)
+        public async Task<BusinessResult<ArticleDTO>> GetBy(Expression<Func<ArticleDTO, bool>> condition)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _iarticleModel.GetBy(condition);
+                return BusinessResult<ArticleDTO>.Success(result, General.OperationSucsess);
+            }
+            catch (Exception ex)
+            {
+                return BusinessResult<ArticleDTO>.Issue(null, General.OperationIssue, ex);
+            }
         }
 
-        public Task<BusinessResult<ArticleDTO>> GetById(int id)
+        public async Task<BusinessResult<ArticleDTO>> GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _iarticleModel.GetById(id);
+                return BusinessResult<ArticleDTO>.Success(result, General.OperationSucsess);
+            }
+            catch (Exception ex)
+            {
+                return BusinessResult<ArticleDTO>.Issue(null, General.OperationIssue, ex);
+            }
         }
     }
 }

@@ -20,5 +20,6 @@ namespace Interfell.Store.Module.Commons.DTO
         public int TotalInShelf { get; set; }
         public int TotalInVault { get; set; }
         public int StoreId { get; set; }
+        public string StoreName { get; set; }
     }
 }

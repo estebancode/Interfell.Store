@@ -53,29 +53,69 @@ namespace Interfell.Store.Data.Business.Implementation
             throw new NotImplementedException();
         }
 
-        public Task<BusinessResult<bool>> EditAsync(StoreDTO entity)
+        public async Task<BusinessResult<bool>> EditAsync(StoreDTO entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var resultOperation = await _istoreModel.EditAsync(entity);
+                return BusinessResult<bool>.Success(true, General.OperationSucsess);
+            }
+            catch (Exception ex)
+            {
+                return BusinessResult<bool>.Issue(false, General.OperationIssue, ex);
+            }
         }
 
-        public Task<BusinessResult<List<StoreDTO>>> GetAll(int quantity = 0)
+        public async Task<BusinessResult<List<StoreDTO>>> GetAll(int quantity = 0)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _istoreModel.GetAll(quantity);
+                return BusinessResult<List<StoreDTO>>.Success(result, General.OperationSucsess);
+            }
+            catch (Exception ex)
+            {
+                return BusinessResult<List<StoreDTO>>.Issue(null, General.OperationIssue, ex);
+            }
         }
 
-        public Task<BusinessResult<List<StoreDTO>>> GetAllBy(Expression<Func<StoreDTO, bool>> condition)
+        public async Task<BusinessResult<List<StoreDTO>>> GetAllBy(Expression<Func<StoreDTO, bool>> condition)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _istoreModel.GetAllBy(condition);
+                return BusinessResult<List<StoreDTO>>.Success(result, General.OperationSucsess);
+            }
+            catch (Exception ex)
+            {
+                return BusinessResult<List<StoreDTO>>.Issue(null, General.OperationIssue, ex);
+            }
         }
 
-        public Task<BusinessResult<StoreDTO>> GetBy(Expression<Func<StoreDTO, bool>> condition)
+        public async Task<BusinessResult<StoreDTO>> GetBy(Expression<Func<StoreDTO, bool>> condition)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _istoreModel.GetBy(condition);
+                return BusinessResult<StoreDTO>.Success(result, General.OperationSucsess);
+            }
+            catch (Exception ex)
+            {
+                return BusinessResult<StoreDTO>.Issue(null, General.OperationIssue, ex);
+            }
         }
 
-        public Task<BusinessResult<StoreDTO>> GetById(int id)
+        public async Task<BusinessResult<StoreDTO>> GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _istoreModel.GetById(id);
+                return BusinessResult<StoreDTO>.Success(result, General.OperationSucsess);
+            }
+            catch (Exception ex)
+            {
+                return BusinessResult<StoreDTO>.Issue(null, General.OperationIssue, ex);
+            }
         }
     }
 }

@@ -1,0 +1,85 @@
+﻿@model Interfell.Store.Module.Commons.DTO.StoreDTO
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <hr />
+    <input type="hidden" id="IdStore" name="IdStore" value="@Model.IdStore" />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdStore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdStore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+</div>
+
+<hr />
+
+<p>
+    @Html.ActionLink("Back to List", "Index", "Home", null, null)
+</p>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modalCreateArticle">
+            Create Article
+        </button>
+    </div>
+</div>
+<hr />
+
+<h3>Articles</h3>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Description</td>
+                    <td>Price</td>
+                    <td>Total in shelf</td>
+                    <td>Total in vault</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody class="table-body-articles">
+                <tr>
+                    <td colspan="7">No hay elementos</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Article")
+}
